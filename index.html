@@ -1,17 +1,59 @@
-<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>JS Bin</title>
   <style>
-    #title{
-      text-align: center;
-      border-style: hidden;
-      border-radius:20px;
-      background-color:red
+    body{
+      margin: 0;
+    }
+
+    a{
+      text-decoration: none;
+    }
+
+    #topHeader{
+      overflow:hidden;
+      background-color: #f1f1f1;
+      padding: 20px 10px;
+      position: sticky;
     }
     
+    #Title{
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    #sideNav{
+      height:100%;
+      width:160px;
+      left:0;
+      background-color: #111;
+      position: fixed;
+      padding: 20px;
+      clear:both;
+    }
+
+    #SOptions{
+      color: #818181;
+      font-family: "Lato", sans-serif;
+      text-align: center;
+      font-size: 20px;
+    }
+
+
+
+
+
+    #PhSection{
+       float:left;
+       position:fixed;
+       left:210px;
+       height: 100%;
+    }
+
+
+
     #jap{
       font-size:20px;
       width:30vmax;
@@ -26,63 +68,110 @@
     }
       
     .Ig{
-        width : 20vmax;
+        height : 22.5vmax;
         margin-right : 20px;
         border-radius : 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        
     }
+
    </style>
 </head>
-<body>
-  <h1 id = "title">Dark Humour</h1>
 
-  <div id="jap">
-    <span>Dark Humour Goes Japan</span>
+
+
+<body>
+
+  <!-- Title/Header -->
+  <div id = "topHeader">
+    <div id="Title">Dark Humour</div>
+  </div>
+
+  
+  <!-- Side Navigation -->
+  <div id="sideNav">
+    <a id="SOptions" href="#default">Dark Humour Goes Japan</a>
   </div>
   
+
+
+  <!-- Image Section -->
+  <div id = "PhSection">
+  </div>
+ 
+
+
+  <script src="jquery-3.3.1.min.js"></script>
+
   <script>
+  //DOM Nodes to be used in Javascript
+  ImageEl = document.getElementById("PhSection");
+  JapOption = document.getElementById("SOptions");
+
   
-  japEl = document.getElementById("jap");
-  var japImg = document.createElement("img");
-  var japImg2 = document.createElement("img");
-  var clicked = 0
-  
-  //image add
-  japImg.src = "first.jpeg";
-  japImg2.style.width = "20vmax";
-  japImg.classList.add("Ig");
+  //Bind
+  $(JapOption).bind("mouseenter",function(){JapOption.style.color = "#f1f1f1";});
+  $(JapOption).bind("mouseleave",function(){JapOption.style.color = "#818181";});
 
-  //ImageSet
-  var ImageSet = [];
-  ImageSet[0] = japImg.cloneNode(true);
-  ImageSet[1] = japImg2;
 
-  var currWidth = 30;
-  var currHeight = 20;
+  //Variables needed
+  var ImageSet = [];  //Element to store images
+  var clicked = 0;  //Check what was cliced
 
-  //function change
-  var getBigger = function(){
+
+  //Functions
+
+  //Image Appear
+  var ImageAppearJp = function(){
     if (clicked === 0){
-      var newWidth = currWidth + 1;
-      currWidth = newWidth;
-      var newHeight = currHeight + 1;
-      currHeight = newHeight + 1;
-      if (currWidth < 100){
-        japEl.style.width = newWidth + "vmax";
-        japEl.style.height = newHeight + "vmax";
-        window.requestAnimationFrame(getBigger);
+      //Add scroll, allowing us to see all images
+      ImageEl.style.overflow = "scroll";
+
+      //Creating Image element to add images
+      var japImg = document.createElement("img");
+   
+      //Giving property to images
+      japImg.classList.add("Ig");
+
+      //Adding Image to japImg then appending to div
+      for (var i = 0; i < 27; i++){
+        var x = i + 1
+        japImg.src = "JapanImage/1 (" + x + ").jpeg";
+        ImageSet[i] = japImg.cloneNode(true);
+        }
+      for (var i = 0; i < 27 ; i++){
+        ImageEl.appendChild(ImageSet[i]);
       }
-      japEl.innerHTML = "";
-      if (currWidth === 100){
-      japEl.style.verticalAlign = "baseline";
-      japEl.appendChild(ImageSet[0]);
-      japEl.appendChild(ImageSet[1]);
-      japImg2.src = "https://i.imgur.com/VDBlEKN.jpg";
-      clicked = 1;
-      }
+
+      //Allow user to know what Image option is displayed
+      $(JapOption).unbind();
+      JapOption.style.color = "#f1f1f1";
+
+
+      clicked = "jap"; //To show japan image was clicked before
+    }
+
+    else{
+      RemoveImg();
+      ImageEl.style.overflow = "auto";
+      JapOption.style.color = "#818181"
+      clicked = 0;
+      $(JapOption).bind("mouseenter",function(){JapOption.style.color = "#f1f1f1";});
+      $(JapOption).bind("mouseleave",function(){JapOption.style.color = "#818181";});
     }
   }
-  japEl.addEventListener("click",getBigger);
+
+  //Remove Image
+  var RemoveImg = function(){
+   for (var i = 0; i < 27 ; i++){
+      ImageEl.removeChild(ImageSet[i]);
+    }
+  }
+
+
+  //Code when interaction is made
+  if (clicked === 0){
+    JapOption.addEventListener("click",ImageAppearJp);
+  }
   </script>
-</body>
-</html>
-      
