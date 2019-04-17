@@ -106,12 +106,6 @@
   <script src="jquery-3.3.1.min.js"></script>
 
   <script>
-  //If viewed from Mobil
-  if (document.documentElement.clientWidth < 900) {
-    window.location = "Mobile.html"
-  }
-
-
   //DOM Nodes to be used in Javascript
   ImageEl = document.getElementById("PhSection");
   JapOption = document.getElementById("SOptions");
