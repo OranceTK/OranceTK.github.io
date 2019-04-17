@@ -1,9 +1,9 @@
-
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>JS Bin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mobile Version</title>
+
   <style>
     body{
       margin: 0;
@@ -81,10 +81,9 @@
 </head>
 
 
-
 <body>
 
-  <!-- Title/Header -->
+ <!-- Title/Header -->
   <div id = "topHeader">
     <div id="Title">Dark Humour</div>
   </div>
@@ -106,11 +105,6 @@
   <script src="jquery-3.3.1.min.js"></script>
 
   <script>
-  //If viewed from Mobil
-  if (document.documentElement.clientWidth < 900) {
-    window.location = "Mobile.html"
-  }
-
 
   //DOM Nodes to be used in Javascript
   ImageEl = document.getElementById("PhSection");
@@ -182,5 +176,7 @@
     JapOption.addEventListener("click",ImageAppearJp);
   }
   </script>
+
+
 </body>
 </html>
