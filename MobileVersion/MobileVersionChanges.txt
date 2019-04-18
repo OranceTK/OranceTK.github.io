@@ -26,7 +26,7 @@
 
     #sideNav{
       width:100%;
-      width:5%;
+      height:5%;
       left:0;
       background-color: #111;
       position: fixed;
@@ -105,11 +105,6 @@
   <script src="jquery-3.3.1.min.js"></script>
 
   <script>
-  //If viewed from Mobile
-  if (document.documentElement.clientWidth < 900) {
-    window.location = "MobileVersion/"
-  }
-
 
   //DOM Nodes to be used in Javascript
   ImageEl = document.getElementById("PhSection");
